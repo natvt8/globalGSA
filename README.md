@@ -48,3 +48,5 @@ Last update: 2014-11-17
 
 Maintainer: N. Vilor-Tejedor <nt.vilor@gmail.com>
 
+Supervisor: Malu Calle <malu.calle@uvic.cat>
+
