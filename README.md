@@ -1,6 +1,22 @@
 # globalGSA - postGWAS analysis
 Implementation of different Gene-set Analysis (GSA) algorithm for combining the individual pvalues of a set of genetic variants (SNPs) in a gene level p-value. 
 
+---
+
+## Description
+
+This package implements four different GSA methods for combining individual p-values of a set of SNPs. Each method provides a p-value for a joint test of association between the phenotype and the specified set of genetic variants. Since the SNPs in a set may follow different modes of inheritance, previously to the GSA, a global test for the best inheritance model (dominant, recessive, log-additive, and co-dominant) is performed on every SNP. The permutational p-value of the best model is obtained.
+
+The four implemented methods are:
+
+* the globalEVT method
+
+* the globalARTP,
+
+* the Fisher's method
+
+* the Simes' method
+
 
 ## Simulation procedure
 
@@ -21,11 +37,11 @@ You can select the total number of CPUs at the begin of the code (the default is
 
 **References**
 
-* Vilor-Tejedor N, Gonzalez JR, Calle ML. *Efficient and Powerful Method for Combining P-Values in Genome-Wide Association Studies*. IEEE/ACM Trans Comput Biol. Bioinform. 2016 Nov;13(6):1100-1106. doi: 10.1109/TCBB.2015.2509977. Epub 2015 Dec 22. PubMed PMID: 28055892.
+* [1] Vilor-Tejedor N, Gonzalez JR, Calle ML. *Efficient and Powerful Method for Combining P-Values in Genome-Wide Association Studies*. IEEE/ACM Trans Comput Biol. Bioinform. 2016 Nov;13(6):1100-1106. doi: 10.1109/TCBB.2015.2509977. Epub 2015 Dec 22. PubMed PMID: 28055892.
 
-* Vilor-Tejedor N, Calle ML. *Global adaptive rank truncated product method for gene-set analysis in association studies*. Biom J. 2014 Sep;56(5):901-11. doi:10.1002/bimj.201300192. Epub 2014 Aug 1. PubMed PMID: 25082012.
+* [2] Vilor-Tejedor N, Calle ML. *Global adaptive rank truncated product method for gene-set analysis in association studies*. Biom J. 2014 Sep;56(5):901-11. doi:10.1002/bimj.201300192. Epub 2014 Aug 1. PubMed PMID: 25082012.
 
-* Yu K, Li Q, Bergen AW, Pfeiffer RM, Rosenberg PS, et al. (2009). *Pathway analysis by adaptive combination of P-values*. Genetic Epidemiology 33: 700–709 [PMC free article] [PubMed]
+* [3] Yu K, Li Q, Bergen AW, Pfeiffer RM, Rosenberg PS, et al. (2009). *Pathway analysis by adaptive combination of P-values*. Genetic Epidemiology 33: 700–709 [PMC free article] [PubMed]
 
 ---
 
