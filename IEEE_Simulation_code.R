@@ -5,15 +5,20 @@
 # Bioinform. 2016 Nov;13(6):1100-1106. doi: 10.1109/TCBB.2015.2509977. Epub 2015
 # Dec 22. PubMed PMID: 28055892.
 
-# Install and check packages
+# &
+
+#Vilor-Tejedor N, Calle ML. Global adaptive rank truncated product method for
+#gene-set analysis in association studies. Biom J. 2014 Sep;56(5):901-11. doi:
+#10.1002/bimj.201300192. Epub 2014 Aug 1. PubMed PMID: 25082012.
 
 
+
+# Install and check package
 #library("globalGSA")
 library("mc2d")
 library("SNPassoc")
 library("genetics")
 source("globalGSA_code_new.R")
-
 
 # Keep simulated data files:
 files <- dir()
