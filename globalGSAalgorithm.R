@@ -1,3 +1,4 @@
+
 ## Biological functions for codifying genotypes:
 Codadd <- function(x) {return(as.numeric(factor(x))-1)}
 Coddom <- function(x) {return(ifelse(Codadd(x)>0,1,0))}
