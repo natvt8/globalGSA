@@ -12,7 +12,7 @@
 library("mc2d")
 library("SNPassoc")
 library("genetics")
-source("/home/nvilor/hapgen2/Code_new.R")
+source("globalGSA_code_new.R")
 
 
 # Keep simulated data files:
@@ -24,7 +24,6 @@ countSP <- function(pvalors) {
 }
 
 # Function to generate LDmatrix
-
 LDmatrixGen <- function(data) {
 	snps <- setupSNP(data, colSNPs=2:ncol(data), name.genotypes=c(0,1,2))
 	snps <- makeGenotypes(data.frame(snps[,-1]))
@@ -36,8 +35,6 @@ LDmatrixGen <- function(data) {
 	diag(LDmatrix) <- 1
 	return(LDmatrix)
 }
-
-
 
 # Gene-set analysis functions: 
 globalARTP_par <- function(i, file, ncores, B, K, output) {
@@ -53,7 +50,6 @@ globalARTP_par <- function(i, file, ncores, B, K, output) {
 	write.table(ans_time[3], paste(output,"_output_time_", core, ".txt", sep=""), col.names=FALSE, row.names=FALSE, quote=FALSE,append=TRUE)
 	return(0)
 }
-
 
 ARTP_par <- function(i, file, ncores, B, K, output) {
 	print(file[i])
@@ -92,24 +88,11 @@ globalEVT_par <- function(i, file, ncores, K, output, LD=FALSE) {
 	return(0)
 }
 
-
-
-
-
-
-
-
 # Computation:
-
-nCPU <- 45
-
+nCPU <- 10
 mclapply(1:length(files), globalEVT_par, file = files, ncores=nCPU, K=5, LD=TRUE, output=paste("GSA_Results_globalEVT_Scenario", substr(files[1],9,9), sep=""), mc.cores=nCPU, mc.preschedule=TRUE)
-
 mclapply(1:length(files), globalARTP_par, file = files, ncores=nCPU, B=1000, K=5, output=paste("GSA_Results_globalARTP_Scenario", substr(files[1],9,9), sep=""), mc.cores=nCPU, mc.preschedule=TRUE)
-
 mclapply(1:length(files), ARTP_par, file = files, ncores=nCPU, B=1000, K=5, output=paste("GSA_Results_ARTP_Scenario", substr(files[1],9,9), sep=""), mc.cores=nCPU, mc.preschedule=TRUE)
-
-
 
 # Summary of results:
 
@@ -133,10 +116,7 @@ names(out.globalARTP_time) <- c( "time")
 (res.gsa_time <- data.frame(Scenario=substr(files[1],9,9),res_globalARTP_time=mean(out.globalARTP_time$time, rm.na=T)))
 write.table(res.gsa_time, paste("GSA_Results_globalARTP_Scenario_time", substr(files[1],9,9), ".txt", sep=""), sep="\t", row.names=F)
 
-
-
 # ARTP
-
 out.ARTP <- NULL
 for(i in 1:nCPU) {
 	data <- read.table(paste(paste("GSA_Results_ARTP_Scenario", substr(files[1],9,9), sep=""), "_output_", i, ".txt", sep=""))
@@ -155,10 +135,7 @@ names(out.ARTP_time) <- c( "time")
 (res.gsa_time <- data.frame(Scenario=substr(files[1],9,9),res_ARTP_time=mean(out.ARTP_time$time)))
 write.table(res.gsa_time, paste("GSA_Results_ARTP_Scenario_time", substr(files[1],9,9), ".txt", sep=""), sep="\t", row.names=F)
 
-
-
 #globalEVT
-
 out.globalEVT <- NULL
 for(i in 1:nCPU) {
 	data <- read.table(paste(paste("GSA_Results_globalEVT_Scenario", substr(files[1],9,9), sep=""), "_output_", i, ".txt", sep=""))
@@ -180,8 +157,6 @@ names(out.globalEVT_time) <- c( "time")
 (res.gsa_time <- data.frame(Scenario=substr(files[1],9,9),res_globalEVT_time=mean(out.globalEVT_time$time)))
 write.table(res.gsa_time, paste("GSA_Results_globalEVT_Scenario_time", substr(files[1],9,9), ".txt", sep=""), sep="\t", row.names=F)
 
-
-
 # Together:
 res.gsa <- data.frame(Scenario=substr(files[1],9,9),res_globalEVT=countSP(out.globalEVT$genevalue),res_globalARTP=countSP(out.globalARTP$genevalue),res_ARTP=countSP(out.ARTP$genevalue))
 write.table(res.gsa, paste("GSA_Results_Scenario", substr(files[1],9,9), ".txt", sep=""), sep="\t", row.names=F)
@@ -190,6 +165,9 @@ write.table(res.gsa, paste("GSA_Results_Scenario", substr(files[1],9,9), ".txt",
 # Together:
 (res.gsa_time <- data.frame(Scenario=substr(files[1],9,9),res_globalEVT_time=mean(out.globalEVT_time$time), res_globalARTP_time=mean(out.globalARTP_time$time),res_ARTP_time=mean(out.ARTP_time$time)))
 write.table(res.gsa_time, paste("GSA_time_Results_Scenario", substr(files[1],9,9), ".txt", sep=""), sep="\t", row.names=F)
+
+
+
 
 
 
