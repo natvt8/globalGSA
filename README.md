@@ -1,7 +1,6 @@
 # globalGSA - postGWAS analysis
 Implementation of different Gene-set Analysis (GSA) algorithm for combining the individual pvalues of a set of genetic variants (SNPs) in a gene level p-value. 
 
----
 
 ## Description
 
@@ -46,4 +45,6 @@ You can select the total number of CPUs at the begin of the code (the default is
 ---
 
 Last update: 2014-11-17
-Maintainer: N. Vilor-Tejedor
+
+Maintainer: N. Vilor-Tejedor <nt.vilor@gmail.com>
+
